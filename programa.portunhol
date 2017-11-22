@@ -1,0 +1,17 @@
+INICIO
+	VAR A: inteiro
+	VAR B: inteiro
+	VAR C: inteiro
+
+	PARA A := 1 ATÉ 20 FAÇA
+		A := A * C
+		B := B + A
+	FIMPARA
+	IMPRIMIR(B)
+
+	SE A > 1000 ENTÃO
+		IMPRIMIR("limite ultrapassado")
+	SENÃO
+		IMPRIMIR("dentro do limite")
+	FIMSE
+FIMPROGRAMA

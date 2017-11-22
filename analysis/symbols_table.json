@@ -1,0 +1,52 @@
+[
+	{
+		"target": "INICIO|FIMPROGRAMA",
+		"source": "",
+		"regex": true
+	},
+	{
+		"target": ":=",
+		"source": "=",
+		"regex": true		
+	},
+	{
+		"target": "VAR ([a-z A-Z]+): inteiro",
+		"source": "var $1 = 0",
+		"regex": true,
+		"saveOnSymbolTable": true
+	},
+	{
+		"target": "VAR ([a-z A-Z]+): caracter",
+		"source": "var $1 = ''",
+		"regex": true,
+		"saveOnSymbolTable": true
+	},
+	{
+		"target": "PARA ([a-z A-Z]+)= ([0-9]+) ATÉ ([0-9]+) FAÇA",
+		"source": "for ($1 = $2; $1 < $3; $1++) {",
+		"regex": true,
+		"saveOnSymbolTable": false		
+	},
+	{
+		"target": "IMPRIMIR\\(",
+		"source": "console.log(",
+		"regex": true
+	},
+	{
+		"target": "SE ([a-z A-Z]+) (>|>=|<|<=) (\"?.*\"?) ENTÃO",
+		"source": "if ($1 $2 $3) {",
+		"regex": true
+	},
+	{
+		"target": "SENÃO",
+		"source": "} else {"
+	},
+	{
+		"target": "FIMPARA",
+		"source": "}"
+	},
+	{
+		"target": "FIMSE",
+		"source": "}"
+	}
+]
