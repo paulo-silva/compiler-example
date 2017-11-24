@@ -1,15 +1,20 @@
 const Lexical = require('./analysis/lexical')
 const fs = require('fs')
 const colors = require('colors')
-var exec = require('child_process').exec;
+var exec = require('child_process').exec
+
+const analysesTranslation = {
+	lexical: 'Léxica',
+	syntax: 'Sintática',
+	semantic: 'Semântica'
+}
 
 class Compiler {
-	
+
 	constructor ( targetCode ) {
 		this.targetCode = targetCode
 		this._compiled = false
 		this.cleanTargetCode()
-		this.defineAnalysis()
 	}
 
 	cleanTargetCode () {
@@ -26,21 +31,21 @@ class Compiler {
 		}
 	}
 
-	defineAnalysis () {
-		this.analysis = {
-			lexical: new Lexical( this.targetCode )
-		}
-	}
-
 	startProcess () {
-		const analysis = [ Lexical ]
+		const analyses = {
+			lexical: Lexical
+		}
 
-		for (let i = 0; i < analysis.length; i++) {
-			const analysisClass = new analysis[i]( this.targetCode )
+		let analysisClass = null
+
+		for (let analysis in analyses) {
+			console.log(`Iniciando análise ${analysesTranslation[analysis]}`.yellow)
+			analysisClass = new analyses[ analysis ]( this.targetCode )
 			this.targetCode = analysisClass.analyse()
-
 			if (analysisClass.errors) {
-				analysisClass.errors.red
+				console.log(`Alguns erros encontrados na análise ${analysesTranslation[analysis]}: ${analysisClass.errors.red}`)
+			} else {
+				console.log(`Análise ${analysesTranslation[analysis]} finalizada`.green)
 			}
 		}
 		this._compiled = true
@@ -55,7 +60,14 @@ class Compiler {
 			if (err) throw err;
 
 			exec(`node temp.js`, { timeout: 3000 }, function (error, stdout, stderr) {
-				console.log(stdout.green)
+				if (error) {
+					console.log('Não foi possível executar o programa,'.red)
+					console.log('isso pode ocorrer por diversas maneiras, sendo a mais comum um loop infinito'.red)
+					throw error
+				}
+				console.log('Resultado da execução:'.magenta)
+				console.log(stdout.bold.magenta)
+				console.log(`Fim de execução...`.magenta)
 			});
 		});
 	}

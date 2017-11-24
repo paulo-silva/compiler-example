@@ -7,7 +7,7 @@
 	{
 		"target": ":=",
 		"source": "=",
-		"regex": true		
+		"regex": true
 	},
 	{
 		"target": "VAR ([a-z A-Z]+): inteiro",
@@ -25,7 +25,7 @@
 		"target": "PARA ([a-z A-Z]+)= ([0-9]+) ATÉ ([0-9]+) FAÇA",
 		"source": "for ($1 = $2; $1 < $3; $1++) {",
 		"regex": true,
-		"saveOnSymbolTable": false		
+		"saveOnSymbolTable": false
 	},
 	{
 		"target": "IMPRIMIR\\(",

@@ -16,9 +16,12 @@ if ( process.argv.length === 3 ) {
 			compiler.startProcess()
 
 			if (compiler.compiled) {
+				console.log(`\n\\o/\nFase compilação finalizada!`.cyan)
+				console.log(`Resultado da compilação pode ser encontrado no arquivo temp.js`.cyan)
+				console.log(`Executando o programa...\n`.cyan)
 				compiler.runProgram()
 			} else {
-				console.log(`Não foi possível compilar o arquivo`.red)				
+				console.log(`Não foi possível compilar o arquivo`.red)
 			}
 		}
 	})

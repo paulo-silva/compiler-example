@@ -3,7 +3,14 @@ var A = 0
 var B = 0
 var C = 0
 
-A = 1
-B = 2
+a for (A  = 1; A  < 20; A ++) {
+A = A * C
+B = B + A
+}
+console.log(B)
 
-console.log('A soma é ' + (A + B) )
+if (A > 1000) {
+console.log("limite ultrapassado")
+} else {
+console.log("dentro do limite")
+}

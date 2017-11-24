@@ -23,18 +23,38 @@ class Lexical extends Base {
 	}
 
 	analyse () {
-		for (let i = 0; i < this.totalSymbols; i++) {
+		this.targetCode = this.targetCode.split( "\n" )
+		this.totalParses = this.targetCode.length
 
-			this.targetCode = this.targetCode.replace(
-				new RegExp( this.symbolsTable[i]['target'], 'g' ),
-				this.symbolsTable[i]['source']
-			)
-
-			if (this.symbolsTable[i]['saveOnSymbolTable']) {
-				
-			}
+		for (let i = 0; i < this.totalParses; i++) {
+			this.translateParse(i)
 		}
-		return this.targetCode
+		return this.targetCode.join( "\n" )
+	}
+
+	translateParse ( lineNumber ) {
+		let regex, regexResult
+
+		for (let i = 0; i < this.totalSymbols; i++) {
+			regex = new RegExp(this.symbolsTable[i]['target'], 'g')
+			regexResult = regex.exec(this.targetCode[lineNumber])
+
+			if (regexResult !== null) {
+
+				this.targetCode[lineNumber] = this.targetCode[lineNumber].replace(
+					RegExp(this.symbolsTable[i]['target'], 'g'),
+					this.symbolsTable[i]['source']
+				)
+
+				if (this.symbolsTable[i]['saveOnSymbolTable']) {
+					this.symbolsTable.push({
+						target: regexResult[1],
+						source: regexResult[1]
+					})
+				}
+			}
+
+		}
 	}
 }
 
