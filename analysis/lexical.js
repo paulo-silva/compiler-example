@@ -31,9 +31,7 @@ class Lexical extends Base {
 			)
 
 			if (this.symbolsTable[i]['saveOnSymbolTable']) {
-				this.symbolsTable.push({
-					target: 
-				})
+				
 			}
 		}
 		return this.targetCode

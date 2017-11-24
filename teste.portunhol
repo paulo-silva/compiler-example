@@ -1,0 +1,10 @@
+INICIO
+	VAR A: inteiro
+	VAR B: inteiro
+	VAR C: inteiro
+
+	A := 1
+	B := 2
+
+	IMPRIMIR('A soma é ' + (A + B) )
+FIMPROGRAMA
