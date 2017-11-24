@@ -22,7 +22,7 @@ class Lexical extends Base {
 		}
 	}
 
-	analyse () {
+	analyze () {
 		this.targetCode = this.targetCode.split( "\n" )
 		this.totalParses = this.targetCode.length
 
@@ -33,7 +33,10 @@ class Lexical extends Base {
 	}
 
 	translateParse ( lineNumber ) {
-		let regex, regexResult
+		let regex
+		let regexResult
+		let translated = true
+		let currentLineAux = ''
 
 		for (let i = 0; i < this.totalSymbols; i++) {
 			regex = new RegExp(this.symbolsTable[i]['target'], 'g')
@@ -41,10 +44,13 @@ class Lexical extends Base {
 
 			if (regexResult !== null) {
 
+				currentLineAux = this.targetCode[lineNumber]
 				this.targetCode[lineNumber] = this.targetCode[lineNumber].replace(
 					RegExp(this.symbolsTable[i]['target'], 'g'),
 					this.symbolsTable[i]['source']
 				)
+
+				translated &= currentLineAux !== this.targetCode[lineNumber]
 
 				if (this.symbolsTable[i]['saveOnSymbolTable']) {
 					this.symbolsTable.push({
@@ -53,7 +59,6 @@ class Lexical extends Base {
 					})
 				}
 			}
-
 		}
 	}
 }

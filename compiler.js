@@ -41,7 +41,7 @@ class Compiler {
 		for (let analysis in analyses) {
 			console.log(`Iniciando análise ${analysesTranslation[analysis]}`.yellow)
 			analysisClass = new analyses[ analysis ]( this.targetCode )
-			this.targetCode = analysisClass.analyse()
+			this.targetCode = analysisClass.analyze()
 			if (analysisClass.errors) {
 				console.log(`Alguns erros encontrados na análise ${analysesTranslation[analysis]}: ${analysisClass.errors.red}`)
 			} else {

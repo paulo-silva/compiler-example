@@ -3,7 +3,7 @@ var A = 0
 var B = 0
 var C = 0
 
-a for (A  = 1; A  < 20; A ++) {
+for (A  = 1; A  < 20; A ++) {
 A = A * C
 B = B + A
 }
